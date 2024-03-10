@@ -20,6 +20,7 @@ public class DrawFile extends JPanel implements KeyListener {
     private Matrix3x3 rotationMatrix;
     private Matrix3x3 scalingMatrix;
     private boolean fileRead;
+    private int numberOfRotations;
 
     public DrawFile(String fileName) {
         this.fileRead = false;
@@ -110,22 +111,24 @@ public class DrawFile extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                Transforms.translate(vertexes, edges, translationMatrix, 0, 10);
+                Transforms.translate(vertexes, edges, translationMatrix, 0, 10,numberOfRotations);
                 break;
             case KeyEvent.VK_S:
-                Transforms.translate(vertexes, edges, translationMatrix, 0, -10);
+                Transforms.translate(vertexes, edges, translationMatrix, 0, -10,numberOfRotations);
                 break;
             case KeyEvent.VK_D:
-                Transforms.translate(vertexes, edges, translationMatrix, 10, 0);
+                Transforms.translate(vertexes, edges, translationMatrix, 10, 0,numberOfRotations);
                 break;
             case KeyEvent.VK_A:
-                Transforms.translate(vertexes, edges, translationMatrix, -10, 0);
+                Transforms.translate(vertexes, edges, translationMatrix, -10, 0,numberOfRotations);
                 break;
             case KeyEvent.VK_I:
                 Transforms.rotate(vertexes, edges, translationMatrix, rotationMatrix, 10);
+                numberOfRotations++;
                 break;
             case KeyEvent.VK_K:
                 Transforms.rotate(vertexes, edges, translationMatrix, rotationMatrix, -10);
+                numberOfRotations--;
                 break;
             case KeyEvent.VK_J:
                 Transforms.scale(vertexes, edges, translationMatrix, scalingMatrix, 0.9);

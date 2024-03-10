@@ -1,5 +1,8 @@
 import MathElements.Matrix3x3;
+import MathElements.Matrix4x4;
 import MathElements.Point3;
+import MathElements.Point4;
+
 import static MathElements.Matrix3x3.times;
 
 public class Transforms {
@@ -41,9 +44,17 @@ public class Transforms {
         }
     }
 
-    public static void translate(Point3[] vertexes, Edge[] edges, Matrix3x3 translationMatrix, int x, int y) {
-        translationMatrix = Matrix3x3.translation(x, y);
-        applyTransformation(vertexes, edges, translationMatrix, null, null, 1);
+    public static void translate(Point3[] vertexes, Edge[] edges, Matrix3x3 translationMatrix, int x, int y, int numberOfRotations) {
+        Point3 pointToMove = new Point3(x,y,1);
+        if (numberOfRotations!=0){
+            Point3 newPoint = Matrix3x3.times(Matrix3x3.rotation(10*numberOfRotations),pointToMove);
+            translationMatrix = Matrix3x3.translation(newPoint.getX(), newPoint.getY());
+            applyTransformation(vertexes, edges, translationMatrix, null, null, 1);
+        }
+        else{
+            translationMatrix = Matrix3x3.translation(x, y);
+            applyTransformation(vertexes, edges, translationMatrix, null, null, 1);
+        }
     }
 
     public static void rotate(Point3[] vertexes, Edge[] edges, Matrix3x3 translationMatrix, Matrix3x3 rotationMatrix,
