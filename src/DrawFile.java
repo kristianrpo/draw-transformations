@@ -62,9 +62,9 @@ public class DrawFile extends JPanel implements KeyListener {
     }
 
     public void drawAxes(Graphics g, int width, int height) {
-        g.setColor(Color.RED);
-        g.drawLine(width / 2, 0, width / 2, height);
         g.setColor(Color.GREEN);
+        g.drawLine(width / 2, 0, width / 2, height);
+        g.setColor(Color.RED);
         g.drawLine(0, height / 2, width, height / 2);
     }
 
